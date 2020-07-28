@@ -60,6 +60,7 @@ class DatabaseHelper {
     return await openDatabase(path, readOnly: false);
   }
 
+
   Future<List<Map<String, dynamic>>> kategorileriGetir() async {
     var db = await _getDatabase();
     var sonuc = await db.query("kategori");

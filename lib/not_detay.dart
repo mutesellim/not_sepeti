@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_sepeti/main.dart';
 import 'package:flutter_not_sepeti/models/kategori.dart';
 import 'package:flutter_not_sepeti/models/notlar.dart';
 import 'package:flutter_not_sepeti/utils/database_helper.dart';
@@ -194,7 +195,10 @@ class _NotDetayState extends State<NotDetay> {
                                   suan.toString(), secilenOncelik))
                               .then((kaydedilenNotID) {
                             if (kaydedilenNotID != 0) {
-                              Navigator.pop(context);
+                              setState(() {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => NotListesi()));
+                              });
                             }
                           });
                         } else {
@@ -208,7 +212,10 @@ class _NotDetayState extends State<NotDetay> {
                                   secilenOncelik))
                               .then((guncellenenID) {
                             if (guncellenenID != 0) {
-                              Navigator.pop(context);
+                              setState(() {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => NotListesi()));
+                              });
                             }
                           });
                         }
@@ -216,7 +223,7 @@ class _NotDetayState extends State<NotDetay> {
                     },
                     child: Text(
                       "Kaydet",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     color: Colors.greenAccent,
                   )

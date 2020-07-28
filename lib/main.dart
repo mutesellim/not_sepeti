@@ -40,7 +40,10 @@ class NotListesi extends StatelessWidget {
                     child: ListTile(
                   leading: Icon(Icons.category),
                   title: Text("Kategoriler"),
-                  onTap: () => _kategorilerSayfasinaGit(context),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _kategorilerSayfasinaGit(context);
+                  },
                 ))
               ];
             },
@@ -63,7 +66,14 @@ class NotListesi extends StatelessWidget {
             mini: true,
           ),
           FloatingActionButton(
-            onPressed: () => _detaySayfasinaGit(context),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NotDetay(
+                            baslik: "Yeni Not",
+                          )));
+            },
             heroTag: "NotEkle",
             tooltip: "Not Ekle",
             child: Icon(Icons.add),
@@ -148,15 +158,6 @@ class NotListesi extends StatelessWidget {
         });
   }
 
-  _detaySayfasinaGit(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => NotDetay(
-                  baslik: "Yeni Not",
-                )));
-  }
-
   _kategorilerSayfasinaGit(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => Kategoriler()));
@@ -186,7 +187,10 @@ class _NotlarState extends State<Notlar> {
       future: databaseHelper.notListesiniGetir(),
       builder: (context, AsyncSnapshot<List<Not>> snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
-          tumNotlar = snapShot.data;
+
+            tumNotlar = snapShot.data;
+
+
           return ListView.builder(
               itemCount: tumNotlar.length,
               itemBuilder: (context, index) {
@@ -282,20 +286,29 @@ class _NotlarState extends State<Notlar> {
     switch (notOncelik) {
       case 0:
         return CircleAvatar(
-          child: Text("AZ"),
-          backgroundColor: Colors.tealAccent.shade700,
+          child: Text(
+            "AZ",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red.shade50,
         );
         break;
       case 1:
         return CircleAvatar(
-          child: Text("ORTA"),
-          backgroundColor: Colors.tealAccent.shade200,
+          child: Text(
+            "ORTA",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red.shade300,
         );
         break;
       case 2:
         return CircleAvatar(
-          child: Text("ACİL"),
-          backgroundColor: Colors.tealAccent.shade50,
+          child: Text(
+            "ACİL",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
         );
         break;
     }
